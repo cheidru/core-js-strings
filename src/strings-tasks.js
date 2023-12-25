@@ -158,6 +158,7 @@ function repeatString(str, times) {
 function removeFirstOccurrences(str, value) {
   if (!value) return str;
   const index = str.indexOf(value);
+  if (index < 0) return str;
   const firstPart = str.substring(0, index);
   const lastPart = str.substring(index + value.length);
   return firstPart + lastPart;
@@ -178,6 +179,7 @@ function removeFirstOccurrences(str, value) {
 function removeLastOccurrences(str, value) {
   if (!value) return str;
   const index = str.lastIndexOf(value);
+  if (index < 0) return str;
   const firstPart = str.substring(0, index);
   const lastPart = str.substring(index + value.length);
   return firstPart + lastPart;
@@ -196,7 +198,7 @@ function removeLastOccurrences(str, value) {
  *   sumOfCodes() => 0
  */
 function sumOfCodes(str) {
-  if (str.length === 0) return 0;
+  if (str === '' || str === undefined || str === null) return 0;
   let sum = 0;
   for (let i = 0; i < str.length; i += 1) {
     sum += str.charCodeAt(i);
@@ -250,8 +252,10 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  const min = `${minutes.length === 1 ? minutes.padStart(2, '0') : minutes}:`;
-  const sec = `${seconds.length === 1 ? seconds.padStart(2, '0') : seconds}`;
+  const mins = minutes.toString();
+  const secs = seconds.toString();
+  const min = `${mins.length === 1 ? mins.padStart(2, '0') : minutes}:`;
+  const sec = `${secs.length === 1 ? secs.padStart(2, '0') : seconds}`;
   return min + sec;
 }
 
