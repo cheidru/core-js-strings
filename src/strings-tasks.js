@@ -328,7 +328,7 @@ function countVowels(str) {
   const vow = ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'I', 'O', 'U', 'Y'];
   let count = 0;
   for (let i = 0; i < str.length; i += 1) {
-    if (str.includes(vow[i])) {
+    if (vow.includes(str[i])) {
       count += 1;
     }
   }
@@ -349,7 +349,9 @@ function countVowels(str) {
  *   isPalindrome('No lemon, no melon') => true
  */
 function isPalindrome(str) {
-  return str === str.split('').reverse().join('');
+  let newstr = str.toLowerCase().replaceAll(' ', '');
+  newstr = newstr.replace(/[\s?!,]/g, '');
+  return newstr === newstr.split('').reverse().join('');
 }
 
 /**
@@ -364,8 +366,17 @@ function isPalindrome(str) {
  *   findLongestWord('A long and winding road') => 'winding'
  *   findLongestWord('No words here') => 'words'
  */
-function findLongestWord(/* sentence */) {
-  throw new Error('Not implemented');
+function findLongestWord(sentence) {
+  const arr = sentence.split(' ');
+  let maxlen = 0;
+  let str = '';
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i].length > maxlen) {
+      maxlen = arr[i].length;
+      str = arr[i];
+    }
+  }
+  return str;
 }
 
 /**
@@ -378,8 +389,13 @@ function findLongestWord(/* sentence */) {
  *   reverseWords('Hello World') => 'olleH dlroW'
  *   reverseWords('The Quick Brown Fox') => 'ehT kciuQ nworB xoF'
  */
-function reverseWords(/* str */) {
-  throw new Error('Not implemented');
+function reverseWords(str) {
+  const arr = str.split(' ');
+  const newarr = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    newarr.push(arr[i].split('').reverse().join(''));
+  }
+  return newarr.join(' ');
 }
 
 /**
@@ -433,8 +449,9 @@ function getStringFromTemplate(firstName, lastName) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const arr = value.split(' ');
+  return `${arr[1]} ${arr[2].slice(0, -1)}`;
 }
 
 /**
